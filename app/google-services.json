@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1033819315482",
+    "project_id": "snapgram-a8c99",
+    "storage_bucket": "snapgram-a8c99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033819315482:android:04d7c65504b865d5e8a0a3",
+        "android_client_info": {
+          "package_name": "com.example.snapgram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLsjQRzWJP9X3d0Th-vPe8ctbUs0UrQes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
