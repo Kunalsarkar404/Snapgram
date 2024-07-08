@@ -20,7 +20,7 @@ import com.example.snapgram.Utils.uploadImage
 import com.example.snapgram.databinding.ActivityPostBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.toObject
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 class PostActivity : AppCompatActivity() {
@@ -82,16 +82,19 @@ class PostActivity : AppCompatActivity() {
                         val user = document.toObject<User>()
                         if (user != null) {
                             if (imageUrl != null) {
+                                val postId = Firebase.firestore.collection(POST).document().id
                                 val post = Post(
-                                    imageUrl!!,
+                                    postUrl = imageUrl!!,
                                     caption = binding.caption.text.toString(),
                                     uid = uid,
-                                    time = System.currentTimeMillis().toString()
+                                    time = System.currentTimeMillis().toString(),
+                                    likes = 0,
+                                    likedByUser = false
                                 )
-                                Firebase.firestore.collection(POST).document().set(post)
+                                Firebase.firestore.collection(POST).document(postId).set(post)
                                     .addOnSuccessListener {
                                         Firebase.firestore.collection(uid)
-                                            .document()
+                                            .document(postId)
                                             .set(post).addOnSuccessListener {
                                                 startActivity(
                                                     Intent(
@@ -116,7 +119,6 @@ class PostActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
-
                         }
                     }
             }

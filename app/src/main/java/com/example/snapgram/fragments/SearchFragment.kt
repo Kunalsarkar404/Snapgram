@@ -12,7 +12,7 @@ import com.example.snapgram.adapters.SearchAdapter
 import com.example.snapgram.databinding.FragmentSearchBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.toObject
 import com.google.firebase.ktx.Firebase
 
 class SearchFragment : Fragment() {
@@ -21,15 +21,10 @@ class SearchFragment : Fragment() {
     private lateinit var adapter: SearchAdapter
     private val userList = ArrayList<User>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
         adapter = SearchAdapter(requireContext(), userList)
@@ -38,14 +33,13 @@ class SearchFragment : Fragment() {
         loadAllUsers()
 
         binding.searchButton.setOnClickListener {
-            val text = binding.searchView.text.toString()
+            val text = binding.searchView.text.toString().trim()
             if (text.isNotEmpty()) {
                 searchUsersByName(text)
             } else {
                 loadAllUsers()
             }
         }
-
         return binding.root
     }
 
@@ -53,10 +47,39 @@ class SearchFragment : Fragment() {
         Firebase.firestore.collection(USER_NODE).get()
             .addOnSuccessListener { result ->
                 val tempList = ArrayList<User>()
+                userList.clear()
                 val currentUserID = Firebase.auth.currentUser!!.uid
 
+                for (i in result.documents){
+                    if(i.id.toString().equals(Firebase.auth.currentUser!!.uid.toString())){
+
+                    }else{
+                        var user: User = i.toObject<User>()!!
+                        tempList.add(user)
+                    }
+                }
+
+
+                userList.addAll(tempList)
+                adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                // Handle failure
+                exception.printStackTrace()
+            }
+    }
+
+    private fun searchUsersByName(name: String) {
+        val currentUserID = Firebase.auth.currentUser!!.uid
+        Firebase.firestore.collection(USER_NODE)
+            .orderBy("name")
+            .startAt(name)
+            .endAt(name + "\uf8ff")
+            .get()
+            .addOnSuccessListener { result ->
+                val tempList = ArrayList<User>()
                 for (document in result.documents) {
-                    val user = document.toObject<User>()
+                    val user = document.toObject(User::class.java)
                     if (user != null && document.id != currentUserID) {
                         tempList.add(user)
                     }
@@ -66,26 +89,9 @@ class SearchFragment : Fragment() {
                 userList.addAll(tempList)
                 adapter.notifyDataSetChanged()
             }
-    }
-
-    private fun searchUsersByName(name: String) {
-        Firebase.firestore.collection(USER_NODE)
-            .whereEqualTo("name", name)
-            .get()
-            .addOnSuccessListener { result ->
-                val tempList = ArrayList<User>()
-                val currentUserID = Firebase.auth.currentUser!!.uid
-
-                for (document in result.documents) {
-                    val user = document.toObject<User>()
-                    if (user != null && document.id != currentUserID) {
-                        tempList.add(user)
-                    }
-                }
-
-                userList.clear()
-                userList.addAll(tempList)
-                adapter.notifyDataSetChanged()
+            .addOnFailureListener { exception ->
+                // Handle failure
+                exception.printStackTrace()
             }
     }
 }

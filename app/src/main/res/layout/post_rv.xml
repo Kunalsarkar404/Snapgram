@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="0dp">
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/design_default_color_on_primary"
         android:orientation="vertical"
         android:theme="@style/Theme.Snapgram"
-        android:background="@color/design_default_color_on_primary"
         tools:context=".fragments.HomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,7 +125,7 @@
                 android:text="0 likes"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_layout"/>
+                app:layout_constraintTop_toBottomOf="@+id/button_layout" />
 
 
             <TextView
@@ -133,6 +135,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
                 android:ems="2"
                 android:text="found a way to print cash"
                 app:layout_constraintBottom_toBottomOf="parent"

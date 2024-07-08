@@ -16,12 +16,22 @@
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="kunal._sarkar"
+            android:text="@string/default_user_name"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/logout_button"
+            app:layout_constraintHorizontal_bias="0.552"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/logout_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="12sp"
+            android:background="@drawable/exit"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -69,7 +79,7 @@
                     android:id="@+id/posts_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text=""
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -115,7 +125,7 @@
                     android:id="@+id/following_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text=""
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -145,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:text="Kunal Sarkar"
+                android:text="Name"
                 android:textSize="14sp" />
 
             <TextView
@@ -153,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="4"
-                android:text="Jai Shree Ram\nDigboi\nBangalore\ncg.kunal.blogspot.com/"
+                android:text="I am a developer\nDigboi\nBangalore\nWelcome to my app"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -208,6 +218,8 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
+        android:backgroundTint="@color/white"
+        android:theme="@style/Base.Theme.Snapgram"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

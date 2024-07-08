@@ -5,7 +5,7 @@ class User {
     var name: String? = null
     var username: String? = null
     var password: String? = null
-    var image: String? = null // Added image property
+    var image: String? = null
 
     constructor()
 
@@ -14,7 +14,7 @@ class User {
         this.name = name
         this.username = username
         this.password = password
-        this.image = image // Initialize image property
+        this.image = image
     }
 
     constructor(email: String?, password: String?) {

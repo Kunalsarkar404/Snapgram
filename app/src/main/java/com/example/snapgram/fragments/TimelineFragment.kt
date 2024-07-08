@@ -41,6 +41,7 @@ class TimelineFragment : Fragment() {
                 var post:Post=i.toObject<Post>()!!
                 tempList.add(post)
             }
+            postList.clear()
             postList.addAll(tempList)
             adapter.notifyDataSetChanged()
         }

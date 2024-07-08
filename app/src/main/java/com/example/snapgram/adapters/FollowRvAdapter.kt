@@ -24,5 +24,6 @@ class FollowRvAdapter(var context: Context, var followList: ArrayList<User>): Re
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         Glide.with(context).load(followList.get(p1).image).placeholder(R.drawable.user).into(p0.binding.profileImage)
         p0.binding.name.text=followList.get(p1).name
+
     }
 }
